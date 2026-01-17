@@ -8,6 +8,7 @@ terraform {
 }
 
 provider "google" {
-  project = "My First Project"
+  # Use the GCP Project ID (machine-readable), not the display name
+  project = "white-outlook-480705-b1"
   region  = "us-central1"
 }
