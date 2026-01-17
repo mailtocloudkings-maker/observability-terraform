@@ -1,7 +1,8 @@
 output "dashboard_name" {
   description = "The display name of the dashboard"
-  value       = google_monitoring_dashboard.dev_dashboard.display_name
+  value       = "DEV Observability Dashboard"
 }
+
 
 output "cpu_alert_name" {
   description = "The display name of the CPU alert policy"
