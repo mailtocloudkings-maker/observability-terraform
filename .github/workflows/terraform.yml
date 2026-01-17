@@ -1,0 +1,44 @@
+name: Terraform GCP Observability (DEV)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      # 3️⃣ Authenticate to Google Cloud
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      # 4️⃣ Terraform Init
+      - name: Terraform Init
+        run: terraform init
+        working-directory: terraform
+
+      # 5️⃣ Terraform Plan
+      - name: Terraform Plan
+        run: terraform plan
+        working-directory: terraform
+
+      # 6️⃣ Terraform Apply
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: terraform
