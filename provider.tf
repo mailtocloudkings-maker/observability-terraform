@@ -8,6 +8,6 @@ terraform {
 }
 
 provider "google" {
-  project = "my-first-project"
+  project = "My First Project"
   region  = "us-central1"
 }
